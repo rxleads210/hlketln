@@ -2153,6 +2153,7 @@
           <li>Нет истории операций в блокчейне</li>
           <li>Запрос на средства без подтверждаемых данных</li>
           <li>Ожидание автоматического одобрения без проверки</li>
+          <li>Нет Trust Wallet — средства зачисляем только на него</li>
         </ul>
       </div>
     </div>
@@ -2406,6 +2407,13 @@
         </div>
         <div class="faq-answer">Условия просрочки отображаются заранее и фиксируются при подтверждении.</div>
       </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          На какой кошелёк отправляете средства?
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">Зачисляем только на Trust Wallet. Убедитесь, что приложение установлено и адрес скопирован верно перед подачей заявки.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -2422,6 +2430,10 @@
       <p class="cta-note">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Не все заявки одобряются
+      </p>
+      <p class="cta-note" style="margin-top:4px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Зачисление на Trust Wallet
       </p>
     </div>
 
@@ -2499,7 +2511,7 @@
         <!-- ШАГ 4: Кошелёк -->
         <div class="calc-step" id="step4">
           <h3 class="calc-step-title">Кошелёк</h3>
-          <p class="calc-step-desc">Укажите адрес и сеть для зачисления</p>
+          <p class="calc-step-desc">Укажите адрес Trust Wallet и сеть для зачисления</p>
 
           <div class="summary-box">
             <div class="summary-item">
