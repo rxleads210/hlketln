@@ -61,6 +61,45 @@
     text-rendering: optimizeLegibility;
   }
 
+
+  /* ── iOS font weight fix ── */
+  /* iOS Safari рендерит Manrope тоньше из-за Retina.
+     Поднимаем font-weight на 100 единиц через iOS-специфичный медиа-запрос */
+  @supports (-webkit-touch-callout: none) {
+    body {
+      -webkit-font-smoothing: antialiased;
+      font-weight: 400;
+    }
+    p, li, span, div {
+      font-weight: 500;
+    }
+    .hero-sub li,
+    .hero-desc,
+    .step-desc,
+    .condition-desc,
+    .review-text,
+    .faq-answer,
+    .stat-label,
+    .adv-text,
+    .term-key,
+    .section-subtitle,
+    .hero-meta-item,
+    .calc-step-desc,
+    .calc-note,
+    .footer-legal a,
+    .footer-nav a {
+      font-weight: 500;
+    }
+    .hero h1 { font-weight: 900; }
+    .section-title { font-weight: 900; }
+    .review-name,
+    .step-title,
+    .condition-title,
+    .term-val,
+    .calc-step-title { font-weight: 800; }
+    strong { font-weight: 700; }
+  }
+
   /* NAV */
   nav {
     position: sticky;
