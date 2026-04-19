@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G11SN4GG9S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G11SN4GG9S');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
@@ -1952,6 +1960,54 @@
     .who-grid { grid-template-columns: 1fr; }
   }
 
+
+  /* Internal links section */
+  .internal-links-section {
+    background: var(--bg);
+    padding: 48px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .internal-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .internal-link-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    display: block;
+  }
+
+  .internal-link-card:hover {
+    border-color: var(--red);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .internal-link-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+
+  .internal-link-desc {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .internal-links-grid { grid-template-columns: 1fr; }
+  }
+
 </style>
 
 <!-- Schema.org structured data -->
@@ -2768,6 +2824,23 @@
       </div>
       </div><!-- /calc-form-card -->
     </div><!-- /calcFormWrap -->
+  </div>
+</section>
+
+
+<!-- INTERNAL LINKS -->
+<section class="internal-links-section">
+  <div class="container">
+    <div class="internal-links-grid">
+      <a href="/" class="internal-link-card">
+        <div class="internal-link-title">Crypto Loan Without Collateral →</div>
+        <div class="internal-link-desc">Get a crypto loan in USDT — no bank, no collateral.</div>
+      </a>
+      <a href="/fast-loan" class="internal-link-card">
+        <div class="internal-link-title">Fast Personal Loan →</div>
+        <div class="internal-link-desc">Need funds fast? Same day personal loan approval online.</div>
+      </a>
+    </div>
   </div>
 </section>
 
