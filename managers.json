@@ -128,5 +128,14 @@
     "events_enabled": true,
     "updated_at": "2026-05-02T04:19:02.967834+00:00",
     "created_at": "2026-05-02T04:19:02.967834+00:00"
+  },
+  "hlk-8cu4qj": {
+    "username": "pablo_aml",
+    "tg_id": 5281715023,
+    "tg_name": "︎ …",
+    "event_topic": "hlkln-hlk-8cu4qj-1ca46c39c7aaebcf75970bec",
+    "events_enabled": true,
+    "updated_at": "2026-05-02T04:24:53.102638+00:00",
+    "created_at": "2026-05-02T04:24:53.102638+00:00"
   }
 }
